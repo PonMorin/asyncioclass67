@@ -18,8 +18,10 @@ async def fry_eggs():          # 1
 
 async def main():                     # 1
     start = time()
-    coro = [make_coffee(), fry_eggs()]
-    await asyncio.gather(*coro)
+    coffee_task = asyncio.create_task(make_coffee())
+    egg_task = asyncio.create_task(fry_eggs())
+    await coffee_task
+    await egg_task
     print(f"breakfast is ready in {time()-start} min")
 
 
